@@ -556,7 +556,6 @@ footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden
       </div>
       <div class="calc rv">
         <h3>Quick <span class="it">estimate</span></h3>
-        <div><label class="l">Type</label><div class="seg" id="cType"><button data-v="color" class="on">Color</button><button data-v="bw">B &amp; W</button></div></div>
         <div><label class="l">Size</label><div class="seg" id="cSize"><button data-v="s" class="on">8.5×11</button><button data-v="l">8.5×14 / 11×17</button></div></div>
         <div><label class="l" for="qNum">Copies per original</label><div class="qty"><input type="range" id="qRange" min="1" max="1500" value="50" aria-label="Copies"><input type="number" id="qNum" min="1" value="50"></div></div>
         <div><label class="l">Add-ons (per copy)</label>
@@ -1008,7 +1007,7 @@ function renderTable(mode){
   document.getElementById('tableCard').dataset.mode=mode; highlight(); document.getElementById('prices').classList.toggle('bw',mode==='bw');
 }
 const tierIndex=q=>PRICES[state.type].tiers.findIndex(([a,b])=>q>=a&&q<=b);
-function highlight(){const m=document.getElementById('tableCard').dataset.mode;[...tbody.rows].forEach((r,i)=>r.classList.toggle('hl',m===state.type&&i===tierIndex(state.qty)))}
+function highlight(){[...tbody.rows].forEach((r,i)=>r.classList.toggle('hl',i===tierIndex(state.qty)))}
 let cur=0,raf2;
 function animateTo(v){cancelAnimationFrame(raf2);const st=cur,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/450);cur=st+(v-st)*ease(p);document.getElementById('amt').textContent='$'+cur.toFixed(2);if(p<1)raf2=requestAnimationFrame(f)};raf2=requestAnimationFrame(f)}
 function calc(){
@@ -1018,9 +1017,8 @@ function calc(){
 }
 const setSeg=(id,v)=>document.querySelectorAll(`#${id} button`).forEach(b=>b.classList.toggle('on',b.dataset.v===v));
 const toggle=document.getElementById('toggle');
-toggle.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{toggle.dataset.mode=b.dataset.mode;toggle.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderTable(b.dataset.mode)}));
-tbody.addEventListener('click',e=>{const tr=e.target.closest('tr');if(!tr)return;state.type=document.getElementById('tableCard').dataset.mode;setSeg('cType',state.type);const col=e.target.closest('td')?.cellIndex;if(col===2)state.size='l';else if(col===1)state.size='s';setSeg('cSize',state.size);setQty(+tr.dataset.q);calc()});
-document.getElementById('cType').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.type=b.dataset.v;setSeg('cType',state.type);toggle.querySelector(`[data-mode="${state.type}"]`).click();calc()});
+toggle.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{toggle.dataset.mode=b.dataset.mode;toggle.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderTable(b.dataset.mode);state.type=b.dataset.mode;calc()}));
+tbody.addEventListener('click',e=>{const tr=e.target.closest('tr');if(!tr)return;const col=e.target.closest('td')?.cellIndex;if(col===2)state.size='l';else if(col===1)state.size='s';setSeg('cSize',state.size);setQty(+tr.dataset.q);calc()});
 document.getElementById('cSize').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.size=b.dataset.v;setSeg('cSize',state.size);calc()});
 const qR=document.getElementById('qRange'),qN=document.getElementById('qNum');
 function setQty(v){v=Math.max(1,Math.round(v)||1);state.qty=v;qN.value=v;qR.value=Math.min(v,1500)}
