@@ -345,10 +345,9 @@ body.drawer-open{overflow:hidden}
 
 /* ---------------- FOOTER ---------------- */
 footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden}
-.ft-big{font-family:var(--kr);font-weight:900;font-size:clamp(90px,22vw,340px);line-height:.85;letter-spacing:-.02em;text-align:center;color:transparent;-webkit-text-stroke:2px #3a3a3a;transition:color .5s,-webkit-text-stroke-color .5s;cursor:default;user-select:none}
+.ft-big{font-family:var(--kr);font-weight:900;font-size:clamp(90px,22vw,340px);line-height:.85;letter-spacing:-.02em;text-align:center;color:var(--ink);-webkit-text-stroke:4px #3a3a3a;paint-order:stroke fill;transition:color .5s,-webkit-text-stroke-color .5s;cursor:default;user-select:none}
 .ft-big:hover{color:var(--paper);-webkit-text-stroke-color:var(--paper)}
 .ft-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding:50px 0 40px}
-.ft-row img{height:64px;width:auto;border-radius:8px}
 .ft-row nav{display:flex;gap:22px;flex-wrap:wrap;font-weight:700}
 .ft-row nav a{position:relative}
 .ft-row nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:2px;background:var(--yellow);transition:right .35s var(--ease)}
@@ -687,8 +686,7 @@ footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden
   <div class="wrap">
     <div class="ft-row">
       <div>
-        <a href="#top"><img src="logo.svg" alt="Creative Printing & Copy"></a>
-        <div class="ft-fine"><span class="kr">창조인쇄</span> · Quality printing with pride since 1979</div>
+        <div class="ft-fine" style="margin-top:0"><span class="kr">창조인쇄</span> · Quality printing with pride since 1979</div>
       </div>
       <nav><a href="#services">Services</a><a href="#prices">Prices</a><a href="#deals">Deals</a><a href="#send">Send file</a><a href="#visit">Visit</a><a href="tel:+12137391090">Call</a></nav>
     </div>
