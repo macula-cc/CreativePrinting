@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Printing & Copy</title>
+<meta name="description" content="Creative Printing & Copy — offset & digital printing, copies, binding and mailbox services in Los Angeles since 1979.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Rammetto+One&family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F2EA;
+  --ink:#141414;
+  --muted:#CFCAC0;
+  --yellow:#F4D93A;
+  --red:#D7372B;
+  --orange:#F2862A;
+  --blue:#2B6FE8;
+  --navy:#1E1D5C;
+  --green:#1F9D5A;
+  --pink:#F6B6CF;
+  --cyan:#00AEEF; --magenta:#EC008C; --cmyk-y:#FFE600;
+  --sans:"Inter Tight",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --display:"Rammetto One","Arial Black",sans-serif;
+  --kr:"Noto Sans KR",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --spring:cubic-bezier(.3,1.6,.5,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.45;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+/* serif runs stay together: if the phrase doesn't fit next to the sans text, it moves to its own line */
+.it{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+h1 .it,h2 .it,h3 .it,.grp{display:inline-block}
+.kr{font-family:var(--kr)}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.cmyk{display:flex;height:6px}
+.cmyk i{flex:1}
+.cmyk i:nth-child(1){background:var(--cyan)}.cmyk i:nth-child(2){background:var(--magenta)}.cmyk i:nth-child(3){background:var(--cmyk-y)}.cmyk i:nth-child(4){background:var(--ink)}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:200;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--cyan) 0 25%,var(--magenta) 25% 50%,var(--cmyk-y) 50% 75%,var(--ink) 75%)}
+
+/* ---------------- HEADER ---------------- */
+.head{position:fixed;top:12px;left:12px;right:12px;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
+.head>*{pointer-events:auto}
+.head .logo{display:block;background:var(--paper);border-radius:12px;padding:5px;box-shadow:0 6px 20px -10px rgba(0,0,0,.35);transition:transform .4s var(--spring)}
+.head .logo img{height:42px;width:auto;border-radius:7px}
+.head .logo:hover{transform:rotate(-3deg) scale(1.04)}
+.head .right{display:flex;gap:8px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 18px;border-radius:999px;background:var(--paper);font-weight:700;font-size:14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.35);transition:transform .3s var(--spring),background .2s,color .2s;white-space:nowrap}
+.pill:hover{transform:translateY(-2px)}
+.pill.dark{background:var(--ink);color:var(--paper)}
+.pill.dark:hover{background:var(--red)}
+.dot{width:9px;height:9px;border-radius:50%;background:#2BB566;box-shadow:0 0 0 0 rgba(43,181,102,.6);animation:ping 1.8s infinite;flex:none}
+.closed .dot,.dot.off{background:#9a9a9a;animation:none}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(43,181,102,0)}100%{box-shadow:0 0 0 0 rgba(43,181,102,0)}}
+.burger{width:46px;padding:0;justify-content:center;flex-direction:column;gap:5px}
+.burger i{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .35s var(--ease)}
+.menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+
+/* fullscreen menu */
+.menu{position:fixed;inset:0;z-index:90;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:100px 6vw 40px;clip-path:circle(0 at calc(100% - 40px) 35px);transition:clip-path .7s var(--ease),visibility 0s .7s;visibility:hidden}
+.menu-open .menu{clip-path:circle(150% at calc(100% - 40px) 35px);visibility:visible;transition:clip-path .7s var(--ease)}
+.menu a.big{display:flex;align-items:baseline;gap:18px;font-weight:800;font-size:clamp(44px,8vw,110px);line-height:1;letter-spacing:-.04em;padding:6px 0;opacity:0;transform:translateY(40px);transition:opacity .5s,transform .6s var(--ease),padding .35s var(--ease)}
+.menu a.big small{font-family:var(--sans);font-size:14px;letter-spacing:0;color:#777;font-weight:600}
+.menu a.big:hover{padding-left:24px}
+.menu-open .menu a.big{opacity:1;transform:none}
+.menu-open .menu a.big:nth-child(2){transition-delay:.05s}.menu-open .menu a.big:nth-child(3){transition-delay:.1s}.menu-open .menu a.big:nth-child(4){transition-delay:.15s}.menu-open .menu a.big:nth-child(5){transition-delay:.2s}.menu-open .menu a.big:nth-child(6){transition-delay:.25s}
+.menu .foot{margin-top:40px;display:flex;gap:28px;flex-wrap:wrap;color:#aaa;font-weight:600}
+.menu .foot a:hover{color:var(--paper)}
+
+/* ---------------- HERO / PHYSICS ---------------- */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:var(--paper);user-select:none;-webkit-user-select:none}
+.hero.floor-open{overflow:visible;z-index:3}
+.hero.floor-open #stage{pointer-events:none}
+.hero-text{position:absolute;inset:0;z-index:6;padding:120px 4vw 0;pointer-events:none}
+.hero h1{font-weight:900;font-size:clamp(58px,11.5vw,190px);line-height:.86;letter-spacing:-.055em}
+.hero h1 .it{font-size:1.08em;letter-spacing:-.02em}
+.hero h1 .amp{font-family:var(--display);font-size:.7em;letter-spacing:0;vertical-align:.08em}
+.hero .sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;flex-wrap:wrap}
+.hero .sub p{max-width:400px;font-size:clamp(16px,1.4vw,19px);font-weight:500}
+.hero .sub .kr-tag{font-size:14px;font-weight:700;text-align:right}
+.hero .sub .kr-tag b{display:block;font-family:var(--kr);font-weight:900;font-size:28px;letter-spacing:.06em}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;pointer-events:auto;width:max-content;max-width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:999px;font-weight:800;font-size:16px;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .35s var(--spring),color .3s}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--yellow);transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1}
+.btn:hover::before{transform:none}
+.btn:hover{transform:translateY(-3px)}
+.btn .arr{display:inline-block;transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(5px) rotate(-45deg)}
+.btn.ink{background:var(--ink);color:var(--paper)}
+.btn.ink:hover{color:var(--ink)}
+.btn.light{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn.white{background:#fff;color:var(--ink)}
+.drag-hint{position:absolute;z-index:6;right:4vw;bottom:36px;font-size:13px;font-weight:700;color:#777;display:flex;gap:8px;align-items:center;pointer-events:none}
+.drag-hint::before{content:"";width:28px;height:28px;border-radius:50%;border:2px dashed #999;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#stage{position:absolute;inset:0;z-index:5}
+.ball,.sign{position:absolute;left:0;top:0;will-change:transform;cursor:grab;touch-action:pan-y;transform:translate(-999px,-999px)}
+.ball{width:var(--d);height:var(--d)}
+.ball:active,.sign:active{cursor:grabbing}
+.ball .in{width:100%;height:100%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;background:var(--c)}
+.ball .lb{font-weight:800;font-size:calc(var(--d)*.085);letter-spacing:.06em;text-transform:uppercase;line-height:1.1;max-width:70%}
+.ball .v{font-family:var(--display);font-size:calc(var(--d)*.3);line-height:1.05}
+.ball .v sup{font-size:.5em;vertical-align:.55em}
+.ball .v small{font-size:.5em}
+.ball .nt{font-size:calc(var(--d)*.065);font-weight:600;opacity:.85;max-width:66%;line-height:1.15}
+.ball.word .in{font-weight:900;font-size:calc(var(--d)*.2);letter-spacing:-.02em}
+.ball.kr .in{font-family:var(--kr);font-weight:900;font-size:calc(var(--d)*.34)}
+.ball.stamp .in{color:var(--ink);border:3px dashed var(--red);font-weight:800;font-size:calc(var(--d)*.1);line-height:1.05}
+.ball.stamp .in b{font-family:var(--display);font-size:2.1em}
+.ball.pale .in{color:var(--ink)}
+
+/* open / closed sign: falls with the balls */
+.sign{width:210px;height:78px}
+.sign .in{width:100%;height:100%;background:var(--ink);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sign b{display:block;font-family:var(--display);font-size:30px;line-height:1.05;color:#ff4d6d;text-shadow:0 0 8px #ff2d55,0 0 22px #ff2d55;animation:flicker 4s infinite;letter-spacing:.04em;transition:color .4s}
+.sign small{display:block;color:#ddd;font-size:11.5px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.sign.closed b{color:#666;text-shadow:none;animation:none}
+@keyframes flicker{0%,92%,100%{opacity:1}93%{opacity:.3}95%{opacity:1}97%{opacity:.5}}
+
+/* ---------------- MANIFESTO (scroll reveal) ---------------- */
+.manifesto{height:260vh;position:relative}
+.manifesto .sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 5vw}
+.manifesto .hello{font-family:var(--serif);font-style:italic;font-size:28px;margin-bottom:18px}
+.manifesto p{font-weight:800;font-size:clamp(32px,5.2vw,78px);line-height:1.02;letter-spacing:-.045em;max-width:1150px}
+.manifesto .w{color:var(--muted);transition:color .25s}
+.manifesto .w.on{color:var(--ink)}
+.squiggle{width:min(420px,70vw);height:30px;margin-top:30px}
+.squiggle path{fill:none;stroke:var(--green);stroke-width:5;stroke-linecap:round}
+
+/* ---------------- SERVICES (expanding awning panel + accordion) ---------------- */
+.svc{padding:4vh 0 0}
+.panel{--p:1;margin-inline:calc(var(--p) * 7vw);border-radius:calc(var(--p) * 44px);background:var(--blue);color:#fff;position:relative;overflow:hidden;padding:110px 6vw 90px}
+.awning{position:absolute;top:0;left:0;right:0;height:46px;background:radial-gradient(circle at 30px 0,#1e5ccc 29px,transparent 30px) 0 0/60px 46px repeat-x}
+.awning::after{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:#1e5ccc}
+.svc .label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px;gap:20px;flex-wrap:wrap}
+.svc .label h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(34px,4vw,56px)}
+.svc .label span{font-weight:600;opacity:.8;max-width:340px}
+.rows{list-style:none;border-top:1px solid rgba(255,255,255,.3)}
+.rows>li{border-bottom:1px solid rgba(255,255,255,.3)}
+.row{display:grid;grid-template-columns:60px 1fr auto 44px;align-items:center;gap:16px;padding:18px 0;width:100%;text-align:left;color:#fff}
+.row .n{font-weight:700;font-size:14px;opacity:.6}
+.row .t{font-weight:900;text-transform:uppercase;font-size:clamp(30px,5.4vw,86px);letter-spacing:-.045em;line-height:.95;transition:transform .5s var(--ease)}
+.row .chip{background:var(--yellow);color:var(--ink);font-weight:800;padding:10px 16px;border-radius:999px;font-size:15px;transform:scale(0) rotate(-12deg);transition:transform .45s var(--spring);white-space:nowrap}
+.pm{position:relative;width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.6);justify-self:end;transition:transform .45s var(--ease),background .3s,border-color .3s}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;background:#fff;transform:translate(-50%,-50%);transition:transform .45s var(--ease),background .3s}
+.pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.row:hover .t{transform:translateX(18px)}
+.row:hover .chip,.open .row .chip{transform:scale(1) rotate(-4deg)}
+.row:hover .pm{background:#fff}
+.row:hover .pm::before,.row:hover .pm::after{background:var(--blue)}
+.open .pm{transform:rotate(135deg);background:#fff;border-color:#fff}
+.open .pm::before,.open .pm::after{background:var(--blue)}
+.det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.open .det{grid-template-rows:1fr}
+.det-in{overflow:hidden}
+.det-grid{display:grid;grid-template-columns:60px 1.1fr 1fr auto;gap:16px 24px;padding:6px 0 34px;opacity:0;transform:translateY(-10px);transition:opacity .4s,transform .5s var(--ease)}
+.open .det-grid{opacity:1;transform:none;transition-delay:.15s}
+.det-grid p{grid-column:2;font-size:18px;font-weight:500;max-width:440px}
+.det-grid dl{grid-column:3;display:grid;grid-template-columns:1fr auto;gap:0 16px;font-weight:600}
+.det-grid dl dt,.det-grid dl dd{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.3)}
+.det-grid dl dd{font-family:var(--display);text-align:right}
+.det-grid .act{grid-column:4;align-self:end}
+.svc .compass{margin:50px auto 0;width:74px;height:74px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--ink);font-family:var(--kr);font-weight:900;font-size:22px;animation:spin 14s linear infinite}
+
+/* ---------------- PRICES ---------------- */
+.prices{background:var(--navy);color:#fff;padding:140px 0 120px;margin-top:-1px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
+.eyebrow{font-family:var(--serif);font-style:italic;font-size:26px;display:inline-block;position:relative;margin-bottom:12px}
+.eyebrow::after{content:"";position:absolute;left:-4px;right:-4px;bottom:0;height:4px;border-radius:4px;background:var(--red);transform:rotate(-1.5deg)}
+.h2{font-weight:900;font-size:clamp(40px,6vw,96px);line-height:.9;letter-spacing:-.05em;max-width:900px}
+.toggle{display:inline-flex;background:rgba(255,255,255,.08);border-radius:999px;padding:5px;position:relative}
+.toggle button{position:relative;z-index:1;color:#fff;font-weight:800;padding:14px 26px;border-radius:999px;transition:color .3s;letter-spacing:.04em}
+.toggle button.active{color:var(--ink)}
+.toggle .knob{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:var(--yellow);transition:transform .5s var(--spring),background .3s}
+.toggle[data-mode="bw"] .knob{transform:translateX(100%);background:#fff}
+.price-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px}
+.tcard{background:#fff;color:var(--ink);border-radius:32px;padding:30px}
+.tcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
+.letters{display:flex;gap:4px}
+.letters span{width:38px;height:38px;display:grid;place-items:center;font-family:var(--display);font-size:20px;border-radius:9px;color:#fff;transition:transform .35s var(--spring)}
+.tcard:hover .letters span{transform:translateY(-4px) rotate(-8deg)}
+.tcard:hover .letters span:nth-child(even){transform:translateY(-4px) rotate(8deg)}
+.tcard-top small{font-weight:800;letter-spacing:.14em;font-size:12px;color:#777;text-align:right}
+table{width:100%;border-collapse:collapse}
+th{font-size:13px;text-align:left;padding:12px 10px;font-weight:700;color:#888}
+td{padding:16px 10px;font-weight:700;font-size:17px;border-top:1px solid #eee;transition:background .2s,color .2s}
+td.p{font-family:var(--display);font-size:24px}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--ink);color:#fff}
+tbody tr:hover td:first-child,tbody tr.hl td:first-child{border-radius:14px 0 0 14px}
+tbody tr:hover td:last-child,tbody tr.hl td:last-child{border-radius:0 14px 14px 0}
+tbody tr.hl td{background:var(--yellow)}
+tbody tr.hl:hover td{background:var(--ink)}
+.tnote{font-size:13px;color:#777;margin-top:14px}
+.calc{background:var(--yellow);color:var(--ink);border-radius:32px;padding:30px;display:flex;flex-direction:column;gap:18px}
+.calc h3{font-weight:900;font-size:32px;letter-spacing:-.03em}
+.calc h3 .it{font-size:1.1em}
+.calc label.l{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;background:rgba(255,255,255,.6);border-radius:14px;padding:12px 8px;font-weight:700;font-size:14px;transition:transform .2s var(--spring),background .2s,color .2s}
+.seg button:hover{transform:translateY(-2px);background:#fff}
+.seg button.on{background:var(--ink);color:#fff}
+.qty{display:flex;align-items:center;gap:12px}
+.qty input[type=range]{flex:1;accent-color:var(--ink)}
+.qty input[type=number]{width:96px;border:0;border-radius:12px;padding:10px;font:800 17px var(--sans);text-align:center;background:#fff}
+.chk{display:flex;flex-wrap:wrap;gap:6px}
+.chk label{font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.6);padding:8px 12px;border-radius:999px;cursor:pointer;transition:background .2s}
+.chk label:hover{background:#fff}
+.chk input{accent-color:var(--ink)}
+.total{margin-top:auto;background:var(--ink);color:#fff;border-radius:22px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.total .amt{font-family:var(--display);font-size:40px}
+.total small{display:block;font-size:12px;color:#aaa}
+
+/* ---------------- EXTRAS: vertical scroll drives a horizontal track ---------------- */
+.extras{position:relative}
+.x-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
+.x-track{display:flex;gap:18px;padding-inline:max(16px,calc((100vw - 1240px)/2));width:max-content;will-change:transform}
+.xcard{flex:none;width:clamp(230px,24vw,300px);height:clamp(290px,44vh,380px);border-radius:30px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;background:var(--c);color:var(--fg,var(--ink));transition:transform .5s var(--spring);position:relative;overflow:hidden}
+.xcard:nth-child(odd){transform:rotate(-1.5deg)}
+.xcard:nth-child(even){transform:rotate(1.5deg) translateY(14px)}
+.xcard:hover{transform:rotate(0) translateY(-10px) scale(1.03)}
+.xcard .tag{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.xcard h4{font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1.05}
+.xcard .pr{font-family:var(--display);font-size:56px;line-height:1}
+.xcard .pr .u{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0;margin-left:4px;opacity:.75}
+.xcard .pr small{font-family:var(--sans);font-size:14px;font-weight:700;display:block;margin-top:6px;opacity:.75}
+.xcard .blob{position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.25);transition:transform .6s var(--ease)}
+.xcard:hover .blob{transform:scale(1.6)}
+.x-count{font-weight:700;font-size:14px;color:#777;display:flex;align-items:center;gap:12px}
+.x-bar{width:160px;height:4px;border-radius:4px;background:#e2ddd2;overflow:hidden}
+.x-bar i{display:block;height:100%;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------------- DEALS: cards pile up over the title as you scroll ---------------- */
+.deals{position:relative;height:340vh}
+.d-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center}
+.d-title{text-align:center;padding:0 16px}
+.d-title .h2{font-size:clamp(48px,9vw,150px);margin-inline:auto;max-width:1100px}
+.deal{position:absolute;left:50%;top:50%;width:min(470px,86vw);border-radius:32px;padding:clamp(24px,3vw,36px);background:var(--c);color:var(--fg,var(--ink));box-shadow:0 30px 60px -30px rgba(0,0,0,.45);will-change:transform;transform:translate(-50%,120vh)}
+.deal .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.deal .badge{display:inline-block;background:var(--ink);color:#fff;font-weight:800;font-size:12px;letter-spacing:.12em;padding:8px 14px;border-radius:999px}
+.deal .big{font-family:var(--display);font-size:clamp(64px,7vw,104px);line-height:.9;margin:22px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.deal .big small,.deal .big s{font-family:var(--sans);font-size:18px;font-weight:700;letter-spacing:0}
+.deal .big s{opacity:.6}
+.deal h3{font-weight:900;font-size:clamp(28px,2.8vw,40px);line-height:.95;letter-spacing:-.04em}
+.deal p{font-size:16px;font-weight:500;margin-top:12px}
+.deal .emoji{font-family:var(--kr);font-weight:900;font-size:22px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.35)}
+
+/* ---------------- EMAIL / USB marquee ---------------- */
+.mq{background:var(--ink);color:var(--paper);padding:34px 0;overflow:hidden;white-space:nowrap}
+.mq .line{display:inline-flex;gap:50px;font-weight:900;font-size:clamp(44px,7vw,110px);letter-spacing:-.04em;will-change:transform}
+.mq .line span{display:inline-flex;gap:50px;align-items:center}
+.mq .line em{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.mq .line i{display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--red);font-style:normal}
+.mq .line i.c{background:var(--cyan)}.mq .line i.m{background:var(--magenta)}.mq .line i.y{background:var(--cmyk-y)}
+.usb{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:30px 16px 0}
+.usb div{background:#fff;border-radius:22px;padding:16px 22px;font-weight:700;transition:transform .35s var(--spring)}
+.usb div:hover{transform:translateY(-5px) rotate(-2deg)}
+.usb b{display:block;font-family:var(--display);font-size:28px}
+
+/* ---------------- SEND FILE ---------------- */
+.drawer-bg{position:fixed;inset:0;z-index:140;background:rgba(20,20,20,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .45s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:150;width:min(620px,100vw);background:var(--yellow);overflow-y:auto;overscroll-behavior:contain;padding:28px clamp(18px,3vw,36px) 40px;transform:translateX(100%);visibility:hidden;transition:transform .7s var(--ease),visibility 0s .7s;box-shadow:-30px 0 60px -30px rgba(0,0,0,.4)}
+.drawer-open .drawer-bg{opacity:1;pointer-events:auto}
+.drawer-open .drawer{transform:none;visibility:visible;transition:transform .7s var(--ease)}
+body.drawer-open{overflow:hidden}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.drawer-head .eyebrow{margin:0}
+.drawer .x{width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;font-size:26px;line-height:1;display:grid;place-items:center;transition:transform .45s var(--spring)}
+.drawer .x:hover{transform:rotate(90deg) scale(1.08)}
+.drawer .h2{font-size:clamp(42px,5vw,68px)}
+.drawer .steps{margin-top:22px;gap:10px}
+.drawer .steps li{font-size:15px}
+.drawer .steps li::before{width:28px;height:28px;font-size:13px}
+.drawer .order{margin-top:26px}
+.drawer .stg{opacity:0;transform:translateX(40px);transition:opacity .5s,transform .7s var(--ease)}
+.drawer-open .drawer .stg{opacity:1;transform:none}
+.drawer-open .drawer .stg:nth-child(2){transition-delay:.12s}.drawer-open .drawer .stg:nth-child(3){transition-delay:.19s}.drawer-open .drawer .stg:nth-child(4){transition-delay:.26s}
+.steps{list-style:none;display:grid;gap:16px;margin-top:34px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;font-weight:600;font-size:17px}
+.steps li::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800}
+.order{background:#fff;border-radius:32px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.order .full{grid-column:1/-1}
+.field label{display:block;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;color:#555}
+.field input,.field select,.field textarea{width:100%;border:2px solid transparent;border-radius:14px;padding:13px 14px;font:500 16px var(--sans);background:var(--paper);transition:border-color .2s,background .2s}
+.field textarea{min-height:96px;resize:vertical}
+.field input:hover,.field select:hover,.field textarea:hover{background:#efebe1}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.drop{position:relative;border:2px dashed #b9b3a6;border-radius:22px;padding:30px 20px;text-align:center;background:var(--paper);cursor:pointer;transition:background .25s,border-color .25s,transform .3s var(--spring)}
+.drop:hover{border-color:var(--ink);transform:translateY(-2px)}
+.drop.over{background:var(--pink);border-color:var(--ink);transform:scale(1.02)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop .ic{width:56px;height:56px;margin:0 auto 10px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;transition:transform .45s var(--spring)}
+.drop:hover .ic{transform:translateY(-6px) rotate(-10deg)}
+.drop b{font-size:17px}
+.drop small{display:block;color:#777;margin-top:4px}
+.files{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.files div{display:flex;justify-content:space-between;gap:10px;background:var(--ink);color:#fff;border-radius:12px;padding:9px 14px;font-size:14px;font-weight:600}
+.files div em{font-style:normal;flex:none;opacity:.7}
+.files div.err{background:var(--red)}
+.order .btn{justify-content:center;width:100%}
+.order .btn[disabled]{opacity:.6;cursor:wait}
+.form-msg{grid-column:1/-1;border-radius:14px;padding:14px 16px;font-weight:700;display:none}
+.form-msg.ok{display:block;background:#c8f2d4}
+.form-msg.bad{display:block;background:#ffd6d6}
+.hp{position:absolute;left:-9999px}
+
+/* ---------------- VISIT (scattered cards) ---------------- */
+.visit{padding:60px 0 140px;overflow-x:clip}
+.visit .center{text-align:center;margin-bottom:30px}
+.visit .h2{margin-inline:auto}
+.board{position:relative;height:820px;max-width:1240px;margin:0 auto}
+.board .photo{position:absolute;left:50%;top:50%;width:min(520px,60%);transform:translate(-50%,-50%) rotate(-2deg);border-radius:30px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.45);transition:transform .6s var(--spring)}
+.board .photo:hover{transform:translate(-50%,-50%) rotate(0) scale(1.02)}
+.board .photo img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.board .photo figcaption{position:absolute;left:14px;bottom:14px;background:var(--paper);font-weight:700;font-size:13px;padding:7px 13px;border-radius:999px}
+.icard{position:absolute;width:300px;border-radius:24px;padding:20px 22px;background:#fff;box-shadow:0 20px 40px -24px rgba(0,0,0,.35);cursor:grab;touch-action:none;user-select:none;opacity:0;transform:translate(var(--fx,0),var(--fy,60px)) rotate(var(--r0,0deg)) scale(.9);transition:opacity .6s,transform .8s var(--spring),box-shadow .3s}
+.icard.in{opacity:1;transform:translate(0,0) rotate(var(--r,0deg))}
+.icard.drag{cursor:grabbing;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);z-index:20}
+.icard:hover{box-shadow:0 26px 50px -22px rgba(0,0,0,.45)}
+.icard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.icard .top b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px}
+.icard .ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--ink)}
+.icard .ico svg{width:20px;height:20px}
+.icard .val{font-weight:800;font-size:20px;letter-spacing:-.02em;word-break:break-word}
+.icard a.val:hover{text-decoration:underline;text-decoration-thickness:2px}
+.icard.blue{background:var(--blue);color:#fff}.icard.blue .ico{background:rgba(255,255,255,.18);color:#fff}
+.icard.green{background:var(--green);color:#fff}.icard.green .ico{background:rgba(255,255,255,.18);color:#fff}
+.icard.red{background:var(--red);color:#fff}.icard.red .ico{background:rgba(255,255,255,.18);color:#fff}
+.icard.yellow{background:var(--yellow)}
+.hours{display:grid;grid-template-columns:auto auto;gap:2px 14px;margin-top:8px;font-size:14px;font-weight:600}
+.hours span{padding:2px 6px;border-radius:6px}
+.hours .today{background:#fff;color:var(--ink)}
+.live{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:16px}
+.drag-note{text-align:center;color:#888;font-weight:600;font-size:14px;margin-top:10px}
+
+/* ---------------- FOOTER ---------------- */
+footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden}
+.ft-big{font-family:var(--kr);font-weight:900;font-size:clamp(90px,22vw,340px);line-height:.85;letter-spacing:-.02em;text-align:center;color:transparent;-webkit-text-stroke:2px #3a3a3a;transition:color .5s,-webkit-text-stroke-color .5s;cursor:default;user-select:none}
+.ft-big:hover{color:var(--paper);-webkit-text-stroke-color:var(--paper)}
+.ft-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding:50px 0 40px}
+.ft-row img{height:64px;width:auto;border-radius:8px}
+.ft-row nav{display:flex;gap:22px;flex-wrap:wrap;font-weight:700}
+.ft-row nav a{position:relative}
+.ft-row nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:2px;background:var(--yellow);transition:right .35s var(--ease)}
+.ft-row nav a:hover::after{right:0}
+.ft-fine{color:#888;font-size:13px;margin-top:8px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s,transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:1000px){
+  .price-grid{grid-template-columns:1fr}
+  .det-grid{grid-template-columns:1fr}
+  .det-grid p,.det-grid dl,.det-grid .act{grid-column:1}
+  .board{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .board .photo{position:relative;left:auto;top:auto;width:100%;transform:rotate(-1deg);grid-column:1/-1}
+  .board .photo:hover{transform:none}
+  .icard{position:relative;width:auto!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;cursor:default;touch-action:auto}
+  .drag-note{display:none}
+}
+@media (max-width:700px){
+  .head .status-pill{display:none}
+  .head .logo img{height:34px}
+  .pill{height:42px;padding:0 14px}
+  .burger{width:42px}
+  .hero-text{padding-top:100px}
+  .hero .sub .kr-tag{display:none}
+  .sign{width:156px;height:62px}
+  .sign b{font-size:22px}
+  .sign small{font-size:9.5px}
+  .drag-hint{display:none}
+  .row{grid-template-columns:30px 1fr 40px;padding:14px 0}
+  .row .chip{display:none}
+  .order{grid-template-columns:1fr;padding:20px}
+  .tcard,.calc{padding:20px 16px;border-radius:26px}
+  td,th{padding:12px 6px}
+  td.p{font-size:19px}
+  .board{grid-template-columns:1fr}
+  .panel{padding:90px 20px 60px}
+  .deal{padding:20px 22px;border-radius:26px}
+  .deal .big{font-size:52px;margin:12px 0 8px}
+  .deal .big small,.deal .big s{font-size:15px}
+  .deal h3{font-size:24px}
+  .deal p{font-size:14px;margin-top:6px}
+  .deal .emoji{width:40px;height:40px;font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv,.icard{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- HEADER -->
+<header class="head">
+  <a class="logo" href="#top" aria-label="Creative Printing & Copy — home"><img src="logo.svg" alt="Creative Printing & Copy · 인쇄 복사"></a>
+  <div class="right">
+    <span class="pill status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Open</span></span>
+    <a class="pill dark" href="#send">Send file</a>
+    <button class="pill burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="Main">
+  <a class="big" href="#top">Home <small>01</small></a>
+  <a class="big" href="#services">Services <small>02</small></a>
+  <a class="big" href="#prices">Prices <small>03</small></a>
+  <a class="big" href="#deals"><span class="it">Deals</span> <small>04</small></a>
+  <a class="big" href="#send">Send a file <small>05</small></a>
+  <a class="big" href="#visit">Visit us <small>06</small></a>
+  <div class="foot"><a href="tel:+12137391090">(213) 739-1090</a><a href="mailto:creativeychang@gmail.com">creativeychang@gmail.com</a><span class="kr">창조인쇄 · since 1979</span></div>
+</nav>
+
+<main id="top">
+
+<!-- HERO with physics -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <h1>Printing <span class="amp">&amp;</span><br>copies, <span class="it">done right.</span></h1>
+    <div class="sub">
+      <p>Offset &amp; digital printing, copies, binding and mailbox services in Los Angeles. Free pick-up, guaranteed delivery date.</p>
+      <div class="kr-tag"><b>인쇄 · 복사</b>Quality printing with pride since 1979</div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn ink" href="#prices">See prices <span class="arr">→</span></a>
+      <a class="btn light" href="#send">Send your file <span class="arr">→</span></a>
+    </div>
+  </div>
+
+  <div id="stage" aria-label="Price balls you can drag">
+    <div class="sign" id="sign" aria-live="polite"><div class="in"><b id="neonWord">OPEN</b><small id="neonNote">Mon–Fri · 9:30 AM–6 PM</small></div></div>
+  </div>
+
+  <div class="drag-hint">Grab a ball. Throw it.</div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="sticky">
+    <div class="hello">Hello, neighbor!</div>
+    <p id="manifestoText">Since 1979 we've been the <em>family print shop</em> under the blue awning. Copies, prints, binding and a mailbox for your business, <em>printed with pride</em> and ready on the date we promise.</p>
+    <svg class="squiggle" viewBox="0 0 420 30" aria-hidden="true"><path id="squig" d="M4 15 Q 24 2 44 15 T 84 15 T 124 15 T 164 15 T 204 15 T 244 15 T 284 15 T 324 15 T 364 15 T 404 15"/></svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="svc" id="services">
+  <div class="panel" id="panel">
+    <div class="awning" aria-hidden="true"></div>
+    <div class="label">
+      <h2>Services</h2>
+      <span>Everything paper, from a single copy to thousands of flyers. Tap a service for details.</span>
+    </div>
+    <ul class="rows" id="rows">
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">01</span><span class="t">Copies &amp; prints</span><span class="chip">from 4¢</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>Black &amp; white or full color, on letter, legal and tabloid. The more copies per original, the lower the price. Print straight from email or USB.</p>
+          <dl><dt>B/W copy, 8.5×11</dt><dd>4¢–15¢</dd><dt>Color copy, 8.5×11</dt><dd>19¢–69¢</dd><dt>Print from email / USB</dt><dd>$1 + print</dd></dl>
+          <div class="act"><a class="btn white" href="#prices">Estimate <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">02</span><span class="t">Business cards</span><span class="chip">from $25</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>Full color business cards, sharp and ready fast. Bring your design or send the file.</p>
+          <dl><dt>Full color cards</dt><dd>from $25</dd><dt>Regular price</dt><dd>$35–45</dd></dl>
+          <div class="act"><a class="btn white" href="#send" data-service="Business cards">Send file <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">03</span><span class="t">Flyers &amp; brochures</span><span class="chip">from $89</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>Offset and digital runs for menus, events and promotions, in full color. Free pick-up and a guaranteed delivery date.</p>
+          <dl><dt>Full color flyers &amp; brochures</dt><dd>from $89</dd><dt>Pick-up</dt><dd>free</dd></dl>
+          <div class="act"><a class="btn white" href="#send" data-service="Flyers &amp; brochures">Send file <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">04</span><span class="t">Binding</span><span class="chip">from $2</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>Coil, comb and Velo binding. Clear cover and leather backing included.</p>
+          <dl><dt>1–199 pages</dt><dd>$2–5</dd><dt>200–500 pages</dt><dd>$6–10</dd></dl>
+          <div class="act"><a class="btn white" href="#send" data-service="Binding">Send file <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">05</span><span class="t">Lamination</span><span class="chip">from $3</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>Protect menus, signs and documents.</p>
+          <dl><dt>8.5 × 11</dt><dd>$3</dd><dt>8.5 × 14</dt><dd>$4</dd><dt>11 × 17</dt><dd>$5</dd></dl>
+          <div class="act"><a class="btn white" href="#send" data-service="Lamination">Send file <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+      <li>
+        <button class="row" aria-expanded="false"><span class="n">06</span><span class="t">Mailbox</span><span class="chip">3 months free</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="det"><div class="det-in"><div class="det-grid">
+          <p>A real street address for your business mail. For a limited time, the first 3 months are free. Ask at the counter.</p>
+          <dl><dt>First 3 months</dt><dd>free</dd></dl>
+          <div class="act"><a class="btn white" href="tel:+12137391090">Call us <span class="arr">→</span></a></div>
+        </div></div></div>
+      </li>
+    </ul>
+    <div class="compass" aria-hidden="true">인쇄</div>
+  </div>
+</section>
+
+<!-- PRICES -->
+<section class="prices" id="prices">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Price list</div>
+        <h2 class="h2">The more you copy, <span class="it">the less you pay.</span></h2>
+      </div>
+      <div class="toggle" id="toggle" data-mode="color" role="tablist">
+        <span class="knob"></span>
+        <button class="active" data-mode="color" role="tab">COLOR</button>
+        <button data-mode="bw" role="tab">B &amp; W</button>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="tcard rv" id="tableCard" data-mode="color">
+        <div class="tcard-top"><div class="letters" id="letters"></div><small>PER COPY · PER ORIGINAL</small></div>
+        <table>
+          <thead><tr><th># of copies</th><th>8.5 × 11</th><th>8.5 × 14 · 11 × 17</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <p class="tnote">Click a row to load it into the estimator. Window promo: B/W 3¢ and color 19¢ after 1,000 prints or copies.</p>
+      </div>
+      <div class="calc rv">
+        <h3>Quick <span class="it">estimate</span></h3>
+        <div><label class="l">Type</label><div class="seg" id="cType"><button data-v="color" class="on">Color</button><button data-v="bw">B &amp; W</button></div></div>
+        <div><label class="l">Size</label><div class="seg" id="cSize"><button data-v="s" class="on">8.5×11</button><button data-v="l">8.5×14 / 11×17</button></div></div>
+        <div><label class="l" for="qNum">Copies per original</label><div class="qty"><input type="range" id="qRange" min="1" max="1500" value="50" aria-label="Copies"><input type="number" id="qNum" min="1" value="50"></div></div>
+        <div><label class="l">Add-ons (per copy)</label>
+          <div class="chk">
+            <label><input type="checkbox" data-add="0.05"> Color paper</label>
+            <label><input type="checkbox" data-add="cs"> Card stock</label>
+            <label><input type="checkbox" data-add="0.03"> Staples</label>
+            <label><input type="checkbox" data-add="0.03"> 3-hole punch</label>
+          </div></div>
+        <div class="total"><div><small>Estimated total</small><span id="unit" style="font-size:13px;color:#ddd"></span></div><div class="amt" id="amt">$0.00</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTRAS: horizontal on vertical scroll -->
+<section class="extras" id="extras">
+  <div class="x-sticky">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow">Finishing &amp; extras</div>
+        <h2 class="h2">The little things <span class="it">that make it look pro.</span></h2>
+        <p style="margin-top:14px;font-weight:600;color:#666">All prices are per unit.</p>
+      </div>
+      <div class="x-count"><span id="xNum">01</span><span class="x-bar"><i id="xBar"></i></span><span>14</span></div>
+    </div>
+    <div class="x-track" id="xTrack">
+      <div class="xcard" style="--c:var(--pink)"><span class="blob"></span><span class="tag">Binding</span><h4>Coil, comb or Velo<br>1–199 pages</h4><div class="pr">$2–5<span class="u">/unit</span><small>Clear cover &amp; leather back incl.</small></div></div>
+      <div class="xcard" style="--c:var(--red);--fg:#fff"><span class="blob"></span><span class="tag">Binding</span><h4>Big books<br>200–500 pages</h4><div class="pr">$6–10<span class="u">/unit</span><small>Clear cover &amp; leather back incl.</small></div></div>
+      <div class="xcard" style="--c:var(--yellow)"><span class="blob"></span><span class="tag">Lamination</span><h4>Letter<br>8.5 × 11</h4><div class="pr">$3<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:#9fd3ff"><span class="blob"></span><span class="tag">Lamination</span><h4>Legal<br>8.5 × 14</h4><div class="pr">$4<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:var(--blue);--fg:#fff"><span class="blob"></span><span class="tag">Lamination</span><h4>Tabloid<br>11 × 17</h4><div class="pr">$5<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:var(--green);--fg:#fff"><span class="blob"></span><span class="tag">Paper</span><h4>Card stock</h4><div class="pr">25¢<span class="u">/unit</span><small>8.5×11 · 50¢ for 11×17</small></div></div>
+      <div class="xcard" style="--c:var(--orange)"><span class="blob"></span><span class="tag">Paper</span><h4>Color paper<br>20#</h4><div class="pr">5¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:#fff"><span class="blob" style="background:var(--paper)"></span><span class="tag">Finish</span><h4>Gloss</h4><div class="pr">50¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:var(--navy);--fg:#fff"><span class="blob"></span><span class="tag">Copy</span><h4>Enlargement</h4><div class="pr">20¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:var(--pink)"><span class="blob"></span><span class="tag">Copy</span><h4>Copy from book</h4><div class="pr">25¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:var(--yellow)"><span class="blob"></span><span class="tag">Copy</span><h4>Hand feeding</h4><div class="pr">25¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:#fff"><span class="blob" style="background:var(--paper)"></span><span class="tag">Finish</span><h4>Machine staples<br>per pair</h4><div class="pr">3¢</div></div>
+      <div class="xcard" style="--c:var(--red);--fg:#fff"><span class="blob"></span><span class="tag">Finish</span><h4>3-hole punching</h4><div class="pr">3¢<span class="u">/unit</span></div></div>
+      <div class="xcard" style="--c:#9fd3ff"><span class="blob"></span><span class="tag">Finish</span><h4>Cutting<br>per cut, 250 sheets</h4><div class="pr">75¢</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEALS: cards pile over the title -->
+<section class="deals" id="deals">
+  <div class="d-sticky">
+    <div class="d-title">
+      <div class="eyebrow">Window specials</div>
+      <h2 class="h2">Deals taped <span class="it">to the glass.</span></h2>
+    </div>
+    <article class="deal" style="--c:var(--yellow)" data-x="-24" data-y="-15" data-r="-7" data-mx="-3" data-my="-27" data-mr="-5">
+      <div class="top"><span class="badge">LIMITED TIME</span><span class="emoji">✉</span></div>
+      <div class="big">3 <small>months free</small></div>
+      <h3>Mailbox, <span class="it">on the house.</span></h3>
+      <p>A real street address for your business mail. Sign up at the counter.</p>
+    </article>
+    <article class="deal" style="--c:var(--blue);--fg:#fff" data-x="22" data-y="-4" data-r="6" data-mx="4" data-my="0" data-mr="5">
+      <div class="top"><span class="badge" style="background:#fff;color:var(--ink)">BEST SELLER</span><span class="emoji">★</span></div>
+      <div class="big">$25 <s>$35–45</s></div>
+      <h3>Full color <span class="it">business cards.</span></h3>
+      <p>Sharp, full color and ready fast.</p>
+    </article>
+    <article class="deal" style="--c:var(--green);--fg:#fff" data-x="-3" data-y="17" data-r="-2" data-mx="-2" data-my="27" data-mr="-3">
+      <div class="top"><span class="badge" style="background:#fff;color:var(--ink)">FREE PICK UP</span><span class="emoji">인쇄</span></div>
+      <div class="big">$89 <small>starting at</small></div>
+      <h3>Flyers <span class="it">&amp; brochures.</span></h3>
+      <p>Full color, with a guaranteed delivery date.</p>
+    </article>
+  </div>
+</section>
+
+<!-- EMAIL / USB -->
+<section class="mq" aria-label="Print from email or USB">
+  <div class="line" id="mqLine">
+    <span>Print from email <i class="c"></i> or USB <em>$1 + print</em> <i class="m"></i></span>
+    <span>Print from email <i class="y"></i> or USB <em>$1 + print</em> <i></i></span>
+    <span>Print from email <i class="c"></i> or USB <em>$1 + print</em> <i class="m"></i></span>
+  </div>
+</section>
+<div class="usb">
+  <div>B/W print · 8.5×11 on 20 lb white<b>$0.10/page</b></div>
+  <div>Color print · 8.5×11 on 20# color copy<b>$0.70/page</b></div>
+</div>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="wrap center rv">
+    <div class="eyebrow">Visit us</div>
+    <h2 class="h2" id="visitTitle">Come by. <span class="it">We're open.</span></h2>
+  </div>
+  <div class="wrap">
+    <div class="board" id="board">
+      <figure class="photo"><img src="o%20(1).jpg" alt="Creative Printing & Copy storefront with yellow sign and blue awning"><figcaption>Look for the yellow sign &amp; blue awning</figcaption></figure>
+
+      <div class="icard yellow" style="left:2%;top:4%;--r:-5deg;--r0:-20deg;--fx:-80px">
+        <div class="top"><b>Call</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span></div>
+        <a class="val" href="tel:+12137391090">(213) 739-1090</a>
+        <div style="font-size:14px;font-weight:600;margin-top:4px">Fax (213) 739-8780</div>
+      </div>
+
+      <div class="icard blue" style="right:1%;top:2%;--r:4deg;--r0:18deg;--fx:80px">
+        <div class="top"><b>Hours</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span></div>
+        <span class="live" id="liveStatus"><span class="dot"></span><span id="liveText">Open now</span></span>
+        <div class="hours" id="hoursList">
+          <span data-d="1">Monday</span><span data-d="1">9:30 AM – 6 PM</span>
+          <span data-d="2">Tuesday</span><span data-d="2">9:30 AM – 6 PM</span>
+          <span data-d="3">Wednesday</span><span data-d="3">9:30 AM – 6 PM</span>
+          <span data-d="4">Thursday</span><span data-d="4">9:30 AM – 6 PM</span>
+          <span data-d="5">Friday</span><span data-d="5">9:30 AM – 6 PM</span>
+          <span data-d="6">Saturday</span><span data-d="6">Closed</span>
+          <span data-d="0">Sunday</span><span data-d="0">Closed</span>
+        </div>
+      </div>
+
+      <div class="icard" style="left:0;bottom:12%;--r:3deg;--r0:-14deg;--fx:-80px">
+        <div class="top"><b>Email</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span></div>
+        <a class="val" href="mailto:creativeychang@gmail.com" style="font-size:17px">creativeychang@gmail.com</a>
+      </div>
+
+      <div class="icard green" style="right:3%;bottom:6%;--r:-3deg;--r0:16deg;--fx:80px">
+        <div class="top"><b>Address</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span></div>
+        <div class="val">[street address]<br>Los Angeles, CA</div>
+      </div>
+
+      <div class="icard red" style="left:34%;bottom:0;--r:-2deg;--r0:8deg;--fy:100px;width:260px">
+        <div class="top"><b>Cash only</b><span class="ico" style="font-weight:900">$</span></div>
+        <div style="font-weight:700">Sorry, no debit or credit cards accepted.</div>
+      </div>
+    </div>
+    <p class="drag-note">Psst, the cards are draggable.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="ft-big" aria-hidden="true">인쇄·복사</div>
+  <div class="wrap">
+    <div class="ft-row">
+      <div>
+        <a href="#top"><img src="logo.svg" alt="Creative Printing & Copy"></a>
+        <div class="ft-fine"><span class="kr">창조인쇄</span> · Quality printing with pride since 1979</div>
+      </div>
+      <nav><a href="#services">Services</a><a href="#prices">Prices</a><a href="#deals">Deals</a><a href="#send">Send file</a><a href="#visit">Visit</a><a href="tel:+12137391090">Call</a></nav>
+    </div>
+  </div>
+  <div class="cmyk"><i></i><i></i><i></i><i></i></div>
+</footer>
+
+<!-- SEND FILE drawer -->
+<div class="drawer-bg" id="drawerBg"></div>
+<aside class="drawer" id="send" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-head"><div class="eyebrow">Send your file</div><button class="x" id="drawerClose" aria-label="Close">×</button></div>
+  <h2 class="h2 stg" id="drawerTitle">Upload it. <span class="it">We'll print it.</span></h2>
+  <div class="stg"><ol class="steps">
+          <li>Upload your PDF, image or document.</li>
+          <li>Tell us size, quantity, color and finishing.</li>
+          <li>We confirm the price and the date. Pay in cash at pick-up.</li>
+        </ol></div>
+  <form class="order stg" id="orderForm" name="print-order" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="print-order">
+        <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+        <div class="field"><label for="f-name">Name *</label><input id="f-name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="f-phone">Phone *</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel"></div>
+        <div class="field full"><label for="f-email">Email *</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="f-service">Service</label>
+          <select id="f-service" name="service"><option>B&amp;W copies / prints</option><option>Color copies / prints</option><option>Business cards</option><option>Flyers &amp; brochures</option><option>Binding</option><option>Lamination</option><option>Other</option></select></div>
+        <div class="field"><label for="f-size">Size</label>
+          <select id="f-size" name="size"><option>8.5 × 11 (Letter)</option><option>8.5 × 14 (Legal)</option><option>11 × 17 (Tabloid)</option><option>Other / not sure</option></select></div>
+        <div class="field"><label for="f-qty">Copies</label><input id="f-qty" name="quantity" type="number" min="1" value="1"></div>
+        <div class="field"><label for="f-date">Needed by</label><input id="f-date" name="needed_by" type="date"></div>
+        <div class="field full">
+          <label>Files *</label>
+          <div class="drop" id="drop">
+            <input type="file" name="file" id="f-file" multiple required accept=".pdf,.jpg,.jpeg,.png,.tif,.tiff,.doc,.docx,.ppt,.pptx,.ai,.psd,.eps,.svg">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg></div>
+            <b>Drop files here or click to choose</b>
+            <small>PDF, JPG, PNG, Word, PowerPoint… up to 8 MB total</small>
+          </div>
+          <div class="files" id="fileList"></div>
+        </div>
+        <div class="field full"><label for="f-notes">Notes</label><textarea id="f-notes" name="notes" placeholder="Paper, stapling, double-sided, binding…"></textarea></div>
+        <div class="form-msg" id="formMsg" role="status"></div>
+        <button class="btn ink full" type="submit" id="sendBtn">Send my file <span class="arr">→</span></button>
+      </form>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const ease=t=>1-Math.pow(1-t,3);
+
+/* ---------------- MENU ---------------- */
+const burger=document.getElementById('burger');
+burger.addEventListener('click',()=>{const o=document.body.classList.toggle('menu-open');burger.setAttribute('aria-expanded',o)});
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{document.body.classList.remove('menu-open');burger.setAttribute('aria-expanded',false)}));
+addEventListener('keydown',e=>{if(e.key==='Escape')document.body.classList.remove('menu-open')});
+
+/* ---------------- PHYSICS HERO ---------------- */
+const BALLS=[
+  {k:'big',c:'var(--red)',html:'<span class="lb">B/W copy</span><span class="v">3<small>¢</small></span><span class="nt">after 1,000 copies</span>'},
+  {k:'big',c:'var(--orange)',html:'<span class="lb">Color copy</span><span class="v">19<small>¢</small></span><span class="nt">after 1,000 copies</span>'},
+  {k:'big',c:'var(--blue)',html:'<span class="lb">Business cards</span><span class="v"><sup>$</sup>25</span><span class="nt">starting at</span>'},
+  {k:'big',c:'var(--green)',html:'<span class="lb">Flyers &amp; brochures</span><span class="v"><sup>$</sup>89</span><span class="nt">starting at</span>'},
+  {k:'mid',c:'var(--red)',cls:'kr',html:'인쇄'},
+  {k:'mid',c:'var(--red)',cls:'kr',html:'복사'},
+  {k:'mid',c:'var(--yellow)',cls:'stamp',html:'SINCE<b>1979</b>'},
+  {k:'sm',c:'var(--cyan)'},{k:'sm',c:'var(--magenta)'},{k:'sm',c:'var(--cmyk-y)'}
+];
+const HOVER_SCALE=1.22;
+function initPhysics(){
+  const hero=document.getElementById('hero'), stage=document.getElementById('stage'), signEl=document.getElementById('sign');
+  const W=()=>hero.clientWidth, H=()=>hero.clientHeight;
+  const base=Math.min(W(),1500);
+  const R={big:clamp(base*.075,50,112),mid:clamp(base*.047,34,70),sm:clamp(base*.022,15,32)};
+  const items=BALLS.map(b=>{
+    const el=document.createElement('div');
+    el.className='ball '+(b.cls||'');
+    el.style.setProperty('--d',(R[b.k]*2)+'px');
+    el.innerHTML=`<div class="in" style="--c:${b.c}">${b.html||''}</div>`;
+    stage.appendChild(el);
+    return {el,k:b.k,r:R[b.k]};
+  });
+  items.push({el:signEl,k:'sign',w:signEl.offsetWidth,h:signEl.offsetHeight});
+
+  if(typeof Matter==='undefined'||REDUCED){ // static fallback: everything resting on the floor
+    let x=20; items.forEach(it=>{const w=it.w||it.r*2,h=it.h||it.r*2;it.el.style.transform=`translate(${x}px,${H()-h-10}px)`;x+=w+8;if(x>W()-60)x=20});
+    return;
+  }
+  const {Engine,Bodies,Composite,Body,Mouse,MouseConstraint,Query}=Matter;
+  const engine=Engine.create({gravity:{x:0,y:1.15}});
+  let floor=null, sides=[], floorOpen=false;
+  function makeWalls(){
+    Composite.remove(engine.world,sides.concat(floor?[floor]:[]));
+    const w=W(),h=H(),t=200;
+    floor=Bodies.rectangle(w/2,h+t/2,w*3,t,{isStatic:true});
+    sides=[Bodies.rectangle(-t/2,h/2-1000,t,h*2+2000,{isStatic:true}),
+           Bodies.rectangle(w+t/2,h/2-1000,t,h*2+2000,{isStatic:true})];
+    Composite.add(engine.world,sides);
+    if(!floorOpen) Composite.add(engine.world,floor);
+  }
+  makeWalls();
+  // hover = the body itself grows and pushes its neighbours
+  items.forEach(it=>{
+    it.el.addEventListener('mouseenter',()=>{if(it.body) it.body.target=HOVER_SCALE});
+    it.el.addEventListener('mouseleave',()=>{if(it.body) it.body.target=1});
+  });
+  let bodies=[], timers=[];
+  const rank={big:0,mid:1,sm:2,sign:3};
+  function drop(){
+    timers.forEach(clearTimeout); timers=[];
+    Composite.remove(engine.world,bodies); bodies=[];
+    items.forEach(it=>{it.body=null;it.el.style.transform='translate(-999px,-999px)';it.el.style.visibility=''});
+    const order=items.map((_,i)=>i).sort(()=>Math.random()-.5).sort((a,b)=>rank[items[a].k]-rank[items[b].k]);
+    order.forEach((i,n)=>timers.push(setTimeout(()=>{
+      const it=items[i], half=it.w?it.w/2:it.r;
+      const x=clamp(W()*(.1+Math.random()*.8),half+10,W()-half-10);
+      const b=it.k==='sign'
+        ? Bodies.rectangle(x,-it.h,it.w,it.h,{chamfer:{radius:16},restitution:.3,friction:.2,frictionAir:.01,density:.002,angle:(Math.random()-.5)*.6})
+        : Bodies.circle(x,-it.r-40,it.r,{restitution:.55,friction:.04,frictionAir:.008,density:.0018});
+      Body.setAngularVelocity(b,(Math.random()-.5)*.25);
+      b.el=it.el; b.inner=it.el.firstElementChild; b.hw=half; b.hh=it.h?it.h/2:it.r; b.s=1; b.target=1;
+      it.body=b; bodies.push(b); Composite.add(engine.world,b);
+    },250+n*110)));
+  }
+  // the floor opens once you scroll past the top of the page, and closes again when you come back up
+  function openFloor(){
+    if(floorOpen) return; floorOpen=true;
+    Composite.remove(engine.world,floor);
+    hero.classList.add('floor-open');
+    bodies.forEach(b=>{b.target=1;Body.setVelocity(b,{x:b.velocity.x+(Math.random()-.5)*3,y:Math.max(b.velocity.y,2)})});
+  }
+  function closeFloor(){
+    if(!floorOpen) return; floorOpen=false;
+    hero.classList.remove('floor-open');
+    Composite.add(engine.world,floor);
+    drop();
+  }
+  // mouse drag without hijacking wheel or touch scrolling
+  const mouse=Mouse.create(stage);
+  ['mousewheel','DOMMouseScroll','wheel'].forEach(ev=>mouse.element.removeEventListener(ev,mouse.mousewheel));
+  mouse.element.removeEventListener('touchstart',mouse.mousedown);
+  mouse.element.removeEventListener('touchmove',mouse.mousemove);
+  mouse.element.removeEventListener('touchend',mouse.mouseup);
+  const mc=MouseConstraint.create(engine,{mouse,constraint:{stiffness:.18,damping:.1,render:{visible:false}}});
+  Composite.add(engine.world,mc);
+  // click without dragging = kick
+  let down=null;
+  stage.addEventListener('mousedown',e=>{down={x:e.clientX,y:e.clientY}});
+  stage.addEventListener('mouseup',e=>{
+    if(!down) return; const moved=Math.hypot(e.clientX-down.x,e.clientY-down.y); down=null;
+    if(moved<5){const hit=Query.point(bodies,mouse.position)[0]; if(hit) kick(hit);}
+  });
+  function kick(b){Body.setVelocity(b,{x:(Math.random()-.5)*12,y:-16-Math.random()*6});Body.setAngularVelocity(b,(Math.random()-.5)*.4)}
+  // touch: tap a ball to kick it and make it swell for a moment
+  stage.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse') return;
+    const r=stage.getBoundingClientRect(), p={x:e.clientX-r.left,y:e.clientY-r.top};
+    const hit=Query.point(bodies,p)[0];
+    if(hit){kick(hit);hit.target=HOVER_SCALE;setTimeout(()=>hit.target=1,500)}
+    else bodies.forEach(b=>{if(Math.hypot(b.position.x-p.x,b.position.y-p.y)<160) kick(b)});
+  });
+  // loop, paused while the hero is off screen
+  let running=false, raf, last=0, acc=0;
+  function step(t){
+    acc+=Math.min(100,last?t-last:16.7); last=t;
+    while(acc>=16.7){
+      for(const b of bodies){
+        if(Math.abs(b.target-b.s)>.002){const ns=b.s+(b.target-b.s)*.18;Body.scale(b,ns/b.s,ns/b.s);b.s=ns}
+      }
+      Engine.update(engine,16.7);acc-=16.7;
+    }
+    const w=W(),h=H();
+    for(const b of bodies){
+      if(floorOpen){
+        // fell through the floor: stop tracking once it's well below the screen
+        if(b.position.y-b.hh>h+innerHeight*1.5&&!b.gone){b.gone=true;b.el.style.visibility='hidden';Composite.remove(engine.world,b)}
+      }else if(b.position.y>h+300||b.position.x<-300||b.position.x>w+300){Body.setPosition(b,{x:w/2,y:-100});Body.setVelocity(b,{x:0,y:0})}
+      if(!b.gone){
+        b.el.style.transform=`translate(${b.position.x-b.hw}px,${b.position.y-b.hh}px) rotate(${b.angle}rad)`;
+        b.inner.style.transform=b.s!==1?`scale(${b.s})`:'';
+      }
+    }
+    raf=requestAnimationFrame(step);
+  }
+  let started=false;
+  new IntersectionObserver(([en])=>{
+    if(en.isIntersecting){if(!started){started=true;if(scrollY<20)drop();else{floorOpen=true;Composite.remove(engine.world,floor);hero.classList.add('floor-open')}} if(!running){running=true;last=0;raf=requestAnimationFrame(step)}}
+    else{running=false;cancelAnimationFrame(raf);if(floorOpen) bodies.forEach(b=>{if(!b.gone){b.gone=true;b.el.style.visibility='hidden';Composite.remove(engine.world,b)}})}
+  },{threshold:0}).observe(hero);
+  addEventListener('scroll',()=>{
+    if(scrollY>Math.min(120,H()*.12)) openFloor();
+    else if(scrollY<=2) closeFloor();
+  },{passive:true});
+  let rt; addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{makeWalls();bodies.forEach(b=>{if(b.position.x>W()-b.hw) Body.setPosition(b,{x:W()-b.hw-5,y:b.position.y})})},150)});
+}
+(document.fonts?document.fonts.ready:Promise.resolve()).then(initPhysics);
+
+/* ---------------- SERVICES ACCORDION ---------------- */
+document.querySelectorAll('#rows .row').forEach(btn=>btn.addEventListener('click',()=>{
+  const li=btn.parentElement, open=!li.classList.contains('open');
+  document.querySelectorAll('#rows > li.open').forEach(o=>{o.classList.remove('open');o.querySelector('.row').setAttribute('aria-expanded',false)});
+  li.classList.toggle('open',open); btn.setAttribute('aria-expanded',open);
+}));
+
+/* ---------------- SCROLL EFFECTS ---------------- */
+// manifesto: split into words, keeping each serif phrase together on one line
+const mt=document.getElementById('manifestoText');
+mt.innerHTML=mt.innerHTML.replace(/<em>(.*?)<\/em>|([^<\s]+)/g,(m,em,w)=>em?`<span class="grp it">${em.split(' ').map(x=>`<span class="w">${x}</span>`).join(' ')}</span>`:`<span class="w">${w}</span>`);
+const words=[...mt.querySelectorAll('.w')];
+const squig=document.getElementById('squig'), sqLen=squig.getTotalLength(); squig.style.strokeDasharray=sqLen;
+const man=document.getElementById('manifesto'), panel=document.getElementById('panel'), prog=document.getElementById('progress');
+const extras=document.getElementById('extras'), xTrack=document.getElementById('xTrack'), xBar=document.getElementById('xBar'), xNum=document.getElementById('xNum');
+const dealsSec=document.getElementById('deals'), deals=[...document.querySelectorAll('.deal')];
+const mq=document.getElementById('mqLine');
+let mqX=0, lastS=scrollY, mqV=1, xDist=0;
+
+function sizeExtras(){
+  xDist=Math.max(0,xTrack.scrollWidth-innerWidth);
+  extras.style.height=(xDist+innerHeight)+'px';
+}
+function onScroll(){
+  const vh=innerHeight, s=scrollY;
+  prog.style.transform=`scaleX(${s/(document.documentElement.scrollHeight-vh)})`;
+
+  // manifesto: starts lighting up as soon as the text is on screen, ends before the section leaves
+  const mr=man.getBoundingClientRect();
+  const start=vh*.55, end=-(mr.height-vh)*.8;
+  const p=clamp((start-mr.top)/(start-end),0,1);
+  const lit=Math.ceil(p*words.length);
+  words.forEach((w,i)=>w.classList.toggle('on',REDUCED||i<lit));
+  squig.style.strokeDashoffset=sqLen*(1-clamp((p-.75)/.25,0,1));
+
+  // services panel grows to full width
+  const pr=panel.getBoundingClientRect(); panel.style.setProperty('--p',clamp(pr.top/(vh*.85),0,1).toFixed(3));
+
+  // extras: vertical scroll moves the cards sideways until the last one, then the page continues
+  const er=extras.getBoundingClientRect(); const xp=clamp(-er.top/Math.max(1,er.height-vh),0,1);
+  xTrack.style.transform=`translateX(${-xp*xDist}px)`;
+  xBar.style.transform=`scaleX(${xp})`;
+  const n=xTrack.children.length; xNum.textContent=String(Math.min(n,1+Math.round(xp*(n-1)))).padStart(2,'0');
+
+  // deals: each card flies in from below and lands on top of the previous ones
+  const dr=dealsSec.getBoundingClientRect(); const dp=clamp(-dr.top/Math.max(1,dr.height-vh),0,1);
+  const mob=innerWidth<700;
+  deals.forEach((d,i)=>{
+    const k=REDUCED?1:ease(clamp((dp-.05-i*.27)/.24,0,1));
+    const x=+(mob?d.dataset.mx:d.dataset.x), y=+(mob?d.dataset.my:d.dataset.y), r=+(mob?d.dataset.mr:d.dataset.r);
+    const ty=y*vh/100+(1-k)*vh*1.1, rot=r+(1-k)*(i%2?14:-14);
+    d.style.transform=`translate(calc(-50% + ${x}vw), calc(-50% + ${ty}px)) rotate(${rot}deg)`;
+  });
+
+  // marquee follows scroll direction
+  const dy=s-lastS; lastS=s; if(dy) mqV=dy>0?1:-1; mqX-=dy*.35;
+}
+function mqLoop(){
+  mqX-=mqV*.6; const third=mq.scrollWidth/3; if(mqX<-third) mqX+=third; if(mqX>0) mqX-=third;
+  mq.style.transform=`translateX(${mqX}px)`; requestAnimationFrame(mqLoop);
+}
+sizeExtras();
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{sizeExtras();onScroll()});
+(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>{sizeExtras();onScroll()});
+onScroll();
+if(!REDUCED) mqLoop();
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// info cards fly in one after another
+const cards=[...document.querySelectorAll('.icard')];
+new IntersectionObserver(([e],o)=>{if(e.isIntersecting){cards.forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*140));o.disconnect()}},{threshold:.2}).observe(document.getElementById('board'));
+
+/* draggable info cards (desktop) */
+cards.forEach(c=>{
+  let sx,sy,ox=0,oy=0,drag=false;
+  c.addEventListener('pointerdown',e=>{
+    if(innerWidth<=1000||e.target.closest('a')) return;
+    drag=true; c.classList.add('drag'); c.setPointerCapture(e.pointerId);
+    sx=e.clientX-ox; sy=e.clientY-oy;
+  });
+  c.addEventListener('pointermove',e=>{if(!drag) return; ox=e.clientX-sx; oy=e.clientY-sy; c.style.translate=`${ox}px ${oy}px`; c.style.rotate=`${clamp((e.movementX||0)*.6,-8,8)}deg`});
+  const end=()=>{if(!drag) return; drag=false; c.classList.remove('drag'); c.style.rotate='0deg'};
+  c.addEventListener('pointerup',end); c.addEventListener('pointercancel',end);
+});
+
+/* ---------------- PRICES ---------------- */
+const PRICES={
+  color:{tiers:[[1,20,.69,.99],[21,100,.49,.79],[101,500,.39,.69],[501,999,.29,.59],[1000,Infinity,.19,.39]]},
+  bw:{tiers:[[1,20,.15,.30],[21,100,.08,.16],[101,500,.06,.12],[501,999,.05,.10],[1000,Infinity,.04,.08]]}
+};
+const fmt=c=>c<1?Math.round(c*100)+'¢':'$'+c.toFixed(2);
+const tbody=document.getElementById('tbody'), letters=document.getElementById('letters');
+const LC=['#D7372B','#2B6FE8','#1F9D5A','#F2862A','#1E1D5C'];
+const state={type:'color',size:'s',qty:50};
+function renderTable(mode){
+  tbody.innerHTML=PRICES[mode].tiers.map(([a,b,s,l])=>`<tr data-q="${a===1?10:a}"><td>${b===Infinity?a.toLocaleString()+' or more':a+' – '+b}</td><td class="p">${fmt(s)}</td><td class="p">${fmt(l)}</td></tr>`).join('');
+  letters.innerHTML=[...(mode==='color'?'COLOR':'B&W')].map((ch,i)=>`<span style="background:${LC[i%5]}">${ch}</span>`).join('');
+  document.getElementById('tableCard').dataset.mode=mode; highlight();
+}
+const tierIndex=q=>PRICES[state.type].tiers.findIndex(([a,b])=>q>=a&&q<=b);
+function highlight(){const m=document.getElementById('tableCard').dataset.mode;[...tbody.rows].forEach((r,i)=>r.classList.toggle('hl',m===state.type&&i===tierIndex(state.qty)))}
+let cur=0,raf2;
+function animateTo(v){cancelAnimationFrame(raf2);const st=cur,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/450);cur=st+(v-st)*ease(p);document.getElementById('amt').textContent='$'+cur.toFixed(2);if(p<1)raf2=requestAnimationFrame(f)};raf2=requestAnimationFrame(f)}
+function calc(){
+  const t=PRICES[state.type].tiers[tierIndex(state.qty)]; let unit=state.size==='s'?t[2]:t[3];
+  document.querySelectorAll('.chk input:checked').forEach(c=>{unit+=c.dataset.add==='cs'?(state.size==='s'?.25:.5):parseFloat(c.dataset.add)});
+  animateTo(unit*state.qty); document.getElementById('unit').textContent=`${state.qty.toLocaleString()} × ${fmt(unit)}`; highlight();
+}
+const setSeg=(id,v)=>document.querySelectorAll(`#${id} button`).forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+const toggle=document.getElementById('toggle');
+toggle.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{toggle.dataset.mode=b.dataset.mode;toggle.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderTable(b.dataset.mode)}));
+tbody.addEventListener('click',e=>{const tr=e.target.closest('tr');if(!tr)return;state.type=document.getElementById('tableCard').dataset.mode;setSeg('cType',state.type);const col=e.target.closest('td')?.cellIndex;if(col===2)state.size='l';else if(col===1)state.size='s';setSeg('cSize',state.size);setQty(+tr.dataset.q);calc()});
+document.getElementById('cType').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.type=b.dataset.v;setSeg('cType',state.type);toggle.querySelector(`[data-mode="${state.type}"]`).click();calc()});
+document.getElementById('cSize').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.size=b.dataset.v;setSeg('cSize',state.size);calc()});
+const qR=document.getElementById('qRange'),qN=document.getElementById('qNum');
+function setQty(v){v=Math.max(1,Math.round(v)||1);state.qty=v;qN.value=v;qR.value=Math.min(v,1500)}
+qR.addEventListener('input',()=>{setQty(+qR.value);calc()});
+qN.addEventListener('input',()=>{setQty(+qN.value);calc()});
+document.querySelectorAll('.chk input').forEach(c=>c.addEventListener('change',calc));
+renderTable('color'); calc();
+
+/* ---------------- OPEN / CLOSED (Los Angeles time) ---------------- */
+const HOURS={1:[570,1080],2:[570,1080],3:[570,1080],4:[570,1080],5:[570,1080]}; // minutes from midnight: 9:30–18:00
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const hm=m=>{const h=Math.floor(m/60),mm=m%60;return ((h+11)%12+1)+(mm?':'+String(mm).padStart(2,'0'):'')+(h<12?' AM':' PM')};
+function laNow(){
+  const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return {day:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(p.weekday),min:(+p.hour)*60+(+p.minute)};
+}
+function shopStatus(day,min){
+  const h=HOURS[day];
+  if(h&&min>=h[0]&&min<h[1]){const left=h[1]-min;return {open:true,note:left<=60?`Closes in ${left} min`:`Open until ${hm(h[1])}`}}
+  if(h&&min<h[0]) return {open:false,note:`Opens today at ${hm(h[0])}`};
+  for(let i=1;i<=7;i++){const d=(day+i)%7;if(HOURS[d]) return {open:false,note:`Opens ${i===1?'tomorrow':DAYS[d]} at ${hm(HOURS[d][0])}`}}
+}
+function updateStatus(){
+  const {day,min}=laNow(), s=shopStatus(day,min), n=s.note[0].toLowerCase()+s.note.slice(1);
+  document.getElementById('sign').classList.toggle('closed',!s.open);
+  document.getElementById('neonWord').textContent=s.open?'OPEN':'CLOSED';
+  document.getElementById('neonNote').textContent=s.note;
+  document.getElementById('statusPill').classList.toggle('closed',!s.open);
+  document.getElementById('statusText').textContent=(s.open?'Open · ':'Closed · ')+n;
+  document.querySelector('#liveStatus .dot').classList.toggle('off',!s.open);
+  document.getElementById('liveText').textContent=(s.open?'Open now · ':'Closed · ')+n;
+  document.getElementById('visitTitle').innerHTML=s.open?'Come by. <span class="it">We\'re open.</span>':'Come by. <span class="it">'+s.note+'.</span>';
+  document.querySelectorAll('#hoursList span').forEach(el=>el.classList.toggle('today',+el.dataset.d===day));
+}
+updateStatus(); setInterval(updateStatus,30000);
+
+/* ---------------- SEND FILE DRAWER ---------------- */
+(function(){
+  const drawer=document.getElementById('send'), sel=document.getElementById('f-service');
+  let lastFocus=null;
+  function open(service){
+    lastFocus=document.activeElement;
+    document.body.classList.remove('menu-open');
+    if(service) [...sel.options].forEach(o=>{if(o.text===service) sel.value=o.value||o.text});
+    document.body.classList.add('drawer-open'); drawer.setAttribute('aria-hidden','false');
+    setTimeout(()=>document.getElementById('f-name').focus({preventScroll:true}),450);
+  }
+  function close(){
+    document.body.classList.remove('drawer-open'); drawer.setAttribute('aria-hidden','true');
+    if(lastFocus) lastFocus.focus({preventScroll:true});
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href="#send"]'); if(!a) return;
+    e.preventDefault(); open(a.dataset.service);
+  });
+  document.getElementById('drawerClose').addEventListener('click',close);
+  document.getElementById('drawerBg').addEventListener('click',close);
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('drawer-open')) close()});
+  if(location.hash==='#send') open();
+})();
+
+/* ---------------- SEND FILE FORM ---------------- */
+(function(){
+  const form=document.getElementById('orderForm'),input=document.getElementById('f-file'),drop=document.getElementById('drop'),list=document.getElementById('fileList'),msg=document.getElementById('formMsg'),btn=document.getElementById('sendBtn');
+  const MAX=8*1024*1024, size=b=>b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB', total=()=>[...input.files].reduce((a,f)=>a+f.size,0);
+  function render(){const fs=[...input.files],over=total()>MAX;list.innerHTML=fs.map(f=>`<div class="${over?'err':''}"><span>${f.name.replace(/[<>&]/g,'')}</span><em>${size(f.size)}</em></div>`).join('')+(over?'<div class="err"><span>Files are over 8 MB. Please email large files or bring a USB drive.</span></div>':'')}
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,()=>drop.classList.remove('over')));
+  drop.addEventListener('drop',e=>{e.preventDefault();if(e.dataTransfer.files.length){input.files=e.dataTransfer.files;render()}});
+  input.addEventListener('change',render);
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();msg.className='form-msg';
+    if(total()>MAX){msg.className='form-msg bad';msg.textContent='Files are over 8 MB. Please email them or bring a USB drive.';return}
+    btn.disabled=true;btn.firstChild.textContent='Sending… ';
+    const local=/^(localhost|127\.0\.0\.1|)$/.test(location.hostname);
+    try{
+      if(local){await new Promise(r=>setTimeout(r,900))}
+      else{const r=await fetch('/',{method:'POST',body:new FormData(form)});if(!r.ok)throw 0}
+      msg.className='form-msg ok';
+      msg.textContent=local?'Preview mode: the form works, but it only sends once the site is online.':'Thanks! We got your file and will call or email you with a quote soon.';
+      form.reset();list.innerHTML='';
+    }catch(_){msg.className='form-msg bad';msg.textContent='Something went wrong. Please email your file to creativeychang@gmail.com or call (213) 739-1090.'}
+    finally{btn.disabled=false;btn.firstChild.textContent='Send my file '}
+  });
+})();
+</script>
+</body>
+</html>
