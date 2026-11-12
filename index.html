@@ -339,6 +339,16 @@ body.drawer-open{overflow:hidden}
 .icard.green{background:var(--green);color:#fff}.icard.green .ico{background:rgba(255,255,255,.18);color:#fff}
 .icard.red{background:var(--red);color:#fff}.icard.red .ico{background:rgba(255,255,255,.18);color:#fff}
 .icard.yellow{background:var(--yellow)}
+.icard .mrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.icard .copy{flex:none;position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;cursor:pointer;transition:transform .3s var(--spring),background .3s}
+.icard .copy:hover{transform:scale(1.1)}
+.icard .copy svg{width:16px;height:16px;grid-area:1/1;transition:opacity .2s,transform .3s var(--spring)}
+.icard .copy .i-ok{opacity:0;transform:scale(.4)}
+.icard .copy.done{background:var(--green)}
+.icard .copy.done .i-copy{opacity:0;transform:scale(.4)}
+.icard .copy.done .i-ok{opacity:1;transform:none}
+.icard .copy::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.icard .copy:hover::after,.icard .copy.done::after{opacity:1;transform:translate(-50%,0)}
 .hours{display:grid;grid-template-columns:auto auto;gap:2px 14px;margin-top:8px;font-size:14px;font-weight:600}
 .hours span{padding:2px 6px;border-radius:6px}
 .hours .today{background:#fff;color:var(--ink)}
@@ -665,7 +675,7 @@ footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden
 
       <div class="icard" style="left:0;bottom:12%;--r:3deg;--r0:-14deg;--fx:-80px">
         <div class="top"><b>Email</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span></div>
-        <a class="val" href="mailto:creativeychang@gmail.com" style="font-size:17px">creativeychang@gmail.com</a>
+        <div class="mrow"><a class="val" href="mailto:creativeychang@gmail.com" style="font-size:17px">creativeychang@gmail.com</a><button class="copy" id="copyMail" type="button" aria-label="Copy email address" data-tip="Copy"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button></div>
       </div>
 
       <div class="icard green" style="right:3%;bottom:6%;--r:-3deg;--r0:16deg;--fx:80px">
@@ -961,11 +971,20 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const cards=[...document.querySelectorAll('.icard')];
 new IntersectionObserver(([e],o)=>{if(e.isIntersecting){cards.forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*140));o.disconnect()}},{threshold:.2}).observe(document.getElementById('board'));
 
+/* copy email */
+const copyBtn=document.getElementById('copyMail');
+copyBtn.addEventListener('click',async()=>{
+  const v='creativeychang@gmail.com';
+  try{await navigator.clipboard.writeText(v)}catch(_){const t=document.createElement('textarea');t.value=v;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(__){}t.remove()}
+  copyBtn.classList.add('done');copyBtn.dataset.tip='Copied!';
+  clearTimeout(copyBtn._t);copyBtn._t=setTimeout(()=>{copyBtn.classList.remove('done');copyBtn.dataset.tip='Copy'},1800);
+});
+
 /* draggable info cards (desktop) */
 cards.forEach(c=>{
   let sx,sy,ox=0,oy=0,drag=false;
   c.addEventListener('pointerdown',e=>{
-    if(innerWidth<=1000||e.target.closest('a')) return;
+    if(innerWidth<=1000||e.target.closest('a,button')) return;
     drag=true; c.classList.add('drag'); c.setPointerCapture(e.pointerId);
     sx=e.clientX-ox; sy=e.clientY-oy;
   });
