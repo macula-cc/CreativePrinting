@@ -340,11 +340,11 @@ body.drawer-open{overflow:hidden}
 .icard.red{background:var(--red);color:#fff}.icard.red .ico{background:rgba(255,255,255,.18);color:#fff}
 .icard.yellow{background:var(--yellow)}
 .icard .mrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.icard .copy{flex:none;position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;cursor:pointer;transition:transform .3s var(--spring),background .3s}
+.icard .copy{flex:none;position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#ebebeb;color:var(--ink);cursor:pointer;transition:transform .3s var(--spring),background .3s}
+.icard .copy:hover{background:#dedede}
 .icard .copy:hover{transform:scale(1.1)}
 .icard .copy svg{width:16px;height:16px;grid-area:1/1;transition:opacity .2s,transform .3s var(--spring)}
 .icard .copy .i-ok{opacity:0;transform:scale(.4)}
-.icard .copy.done{background:var(--green)}
 .icard .copy.done .i-copy{opacity:0;transform:scale(.4)}
 .icard .copy.done .i-ok{opacity:1;transform:none}
 .icard .copy::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
@@ -673,7 +673,7 @@ footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden
         </div>
       </div>
 
-      <div class="icard" style="left:0;bottom:12%;--r:3deg;--r0:-14deg;--fx:-80px">
+      <div class="icard" style="left:0;bottom:12%;width:360px;--r:3deg;--r0:-14deg;--fx:-80px">
         <div class="top"><b>Email</b><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span></div>
         <div class="mrow"><a class="val" href="mailto:creativeychang@gmail.com" style="font-size:17px">creativeychang@gmail.com</a><button class="copy" id="copyMail" type="button" aria-label="Copy email address" data-tip="Copy"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button></div>
       </div>
