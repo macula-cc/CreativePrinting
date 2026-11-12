@@ -354,7 +354,8 @@ body.drawer-open{overflow:hidden}
 /* ---------------- FOOTER ---------------- */
 footer{background:var(--ink);color:var(--paper);padding:90px 0 0;overflow:hidden}
 .ft-big{font-family:var(--kr);font-weight:900;font-size:clamp(90px,22vw,340px);line-height:.85;letter-spacing:-.02em;text-align:center;color:var(--ink);-webkit-text-stroke:4px #3a3a3a;paint-order:stroke fill;transition:color .5s,-webkit-text-stroke-color .5s;cursor:default;user-select:none}
-.ft-big:hover{color:var(--paper);-webkit-text-stroke-color:var(--paper)}
+.ft-big span{display:inline-block;transition:color .6s,-webkit-text-stroke-color .6s;transition-delay:calc(var(--i)*90ms)}
+.ft-big:hover span,.ft-big.lit span{color:var(--paper);-webkit-text-stroke-color:var(--paper)}
 .ft-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding:50px 0 40px}
 .ft-row nav{display:flex;gap:22px;flex-wrap:wrap;font-weight:700}
 .ft-row nav a{position:relative}
@@ -961,6 +962,11 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 // info cards fly in one after another
 const cards=[...document.querySelectorAll('.icard')];
 new IntersectionObserver(([e],o)=>{if(e.isIntersecting){cards.forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*140));o.disconnect()}},{threshold:.2}).observe(document.getElementById('board'));
+
+/* footer word lights up when it scrolls in */
+const ftBig=document.querySelector('.ft-big');
+ftBig.innerHTML=[...ftBig.textContent].map((ch,i)=>`<span style="--i:${i}">${ch}</span>`).join('');
+new IntersectionObserver(([e])=>ftBig.classList.toggle('lit',e.isIntersecting),{threshold:.6}).observe(ftBig);
 
 /* copy email */
 const copyBtn=document.getElementById('copyMail');
